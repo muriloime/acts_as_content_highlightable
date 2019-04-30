@@ -57,6 +57,9 @@ module ActsAsContentHighlightable
     def get_highlightable
       highlightable_model = params[:highlightable_type].to_s.constantize
       @highlightable = highlightable_model.respond_to?(:find_by_id) && highlightable_model.find_by_id(params[:highlightable_id])
+      if @highlightable.nil?
+        raise ArgumentError.new("Highlightable item not found. Please check the parameter: highlightable_id")
+      end
       @highlightable = nil unless @highlightable.respond_to?(:highlightable_columns)
     end
 
