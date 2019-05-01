@@ -2,7 +2,7 @@ require 'nokogiri'
 class ActsAsContentHighlightable::HtmlNodeParser
   def initialize(content)
     @content = content
-    @parsed = Nokogiri::HTML.parse('<div>' + @content + '</div>')
+    @parsed = Nokogiri::HTML.parse("<div>#{@content}</div>")
   end
 
   attr_accessor :content, :parsed
