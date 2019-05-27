@@ -4,7 +4,8 @@ end
 
 ActsAsContentHighlightable::Engine.routes.draw do
   scope module: "acts_as_content_highlightable" do
-    post 'content_highlights/add'
-    post 'content_highlights/remove'
+    get 'content_highlights/index'
+    post 'content_highlights/create'
+    post 'content_highlights/destroy'
   end
 end
