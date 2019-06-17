@@ -5,7 +5,7 @@ module ActsAsContentHighlightable
     before_action :authenticate_user!
     before_action :set_highlighter_user
     before_action :set_highlightable
-    before_action :set_highlightable_column, only: %i[add index]
+    before_action :set_highlightable_column, only: %i[create index]
     load_and_authorize_resource :content_highlight, class: ContentHighlight
 
     def index
