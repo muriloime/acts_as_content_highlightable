@@ -6,7 +6,7 @@ module ActsAsContentHighlightable
     before_action :set_highlighter_user
     before_action :set_highlightable
     before_action :set_highlightable_column, only: %i[create index]
-    load_and_authorize_resource :content_highlight, class: ContentHighlight
+    # load_and_authorize_resource :content_highlight, class: ContentHighlight
 
     def index
       if @highlightable.present? && (ContentHighlight.respond_to?(:can_view_highlights?) ? ContentHighlight.can_view_highlights?(@highlightable, @highlighter_user) : true)
