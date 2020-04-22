@@ -314,9 +314,9 @@ var contentHighlightWorker = function(element, options){
   }
 
   this.removePopTip = function(e){
-    if (e && !$(e.target).parents('.component-quiz-panel').length) {
-      return;
-    }
+    // if (e && !$(e.target).parents('.component-quiz-panel').length) {
+    //   return;
+    // }
     if(self.popTip != undefined){
       self.element.removeChild(self.popTip);
       self.popTip = undefined;
