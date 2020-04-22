@@ -1,12 +1,12 @@
-class ContentHighlight < ApplicationRecord
+class ContentHighlight < ActiveRecord::Base
   belongs_to :highlightable, polymorphic: true
   belongs_to :user
 
-  validates :user_id, :highlightable_id, :highlightable_type, :highlightable_column, :content, presence: true
-  validates :container_node_identifier, :container_node_identifier_key, :container_node_type, :startnode_offset, :endnode_offset, presence: true
-  validates :selection_backward, inclusion: { in: [true, false] }
+  validates_presence_of :user_id, :highlightable_id, :highlightable_type, :highlightable_column, :content
+  validates_presence_of :container_node_identifier, :container_node_identifier_key, :container_node_type, :startnode_offset, :endnode_offset
+  validates_inclusion_of :selection_backward, :in => [true, false]
 
-  validates :container_node_identifier, unique: { scope: %i[container_node_type startnode_offset endnode_offset highlightable user_id] }
+  validates_uniqueness_of :container_node_identifier, scope: [:container_node_type, :startnode_offset, :endnode_offset, :highlightable, :user_id]
 
   # This method shall be used to choose the highlights the user can see
   def self.highlights_to_show(highlightable, user, options = {})

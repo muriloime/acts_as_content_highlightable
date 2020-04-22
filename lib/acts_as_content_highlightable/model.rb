@@ -4,14 +4,14 @@ module ActsAsContentHighlightable
       column_names = Array.wrap(column_names)
 
       if not column_names.all? { |column_name| self.column_names.include? column_name.to_s }
-        raise ArgumentError, "acts_as_content_highlightable_on: One or more invalid attribute #{column_name}"
+        raise ArgumentError, "acts_as_content_highlightable_on: One or more invalid attribute #{column_names}"
       end
 
       setup_options(column_names, options)
 
       class_eval do
         has_many :content_highlights, as: :highlightable
-        before_save :prepare_for_content_highlights, if: -> { column_names.map { |column_name| "#{column_name}_changed?" } }
+        before_save :prepare_for_content_highlights, if: -> {column_names.all?{|column_name| send("#{column_name}_changed?".to_sym)}}
       end
 
       include ActsAsContentHighlightable::Model::InstanceMethods
