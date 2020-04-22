@@ -71,7 +71,7 @@ and this to your application.css file
 #### 5. Retroactively tag text nodes
 This gem creates a `before_save` callback to tag every html node in the content (e.g. `:summary`) with a data attribute `data-chnode="<unique_random_hex>"`. This is essential to save, persist and display highlights. To retroactively tag the nodes, use some variant of the following code
 ```
-Post.all.each{|post| post.prepare_for_content_highlights && post.save}
+Post.find_each{|obj| obj.prepare_for_content_highlights && obj.save!}
 ```
 Please note that the data in your content column will be altered by this gem - it adds data attributes to text nodes of the html content. If your content is plain text, it will be converted into html text. See examples below
 ```
