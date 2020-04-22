@@ -1,12 +1,12 @@
 .content-highlight{
-  background: yellow;
+  background: #E4FC5B;
   cursor: pointer;
 }
 .content-highlight-lifetime-me{
-  background: #0cf10c;
+  background: #66d313;
 }
 .content-highlight-lifetime-others{
-  background: yellow;
+  background: #E4FC5B;
 }
 .content-highlight-active{
   background: #c1c124;
