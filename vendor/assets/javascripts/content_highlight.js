@@ -134,7 +134,6 @@ var contentHighlightWorker = function(element, options){
     }
     self.settings.activeHighlightId = null;
   }
-
   this.setEventListenersToHighlights = function(highlights){
     for(var iter = 0; iter < highlights.length; iter ++){
       highlights[iter].addEventListener('click', self.clickHighlightListener);
@@ -190,7 +189,7 @@ var contentHighlightWorker = function(element, options){
               self.unmarkActiveHighlights();
               classApplier.undoToSelection();
 
-              if($('.content-highlight:not(.content-highlight-lifetime-me)').length) {
+              if(document.querySelectorAll('.content-highlight:not(.content-highlight-lifetime-me)').length) {
                 self.getContentHighlightsFromServer();
               }
 
@@ -301,6 +300,8 @@ var contentHighlightWorker = function(element, options){
     if(self.popTip != undefined){
       self.popTip.style.top = highlightElement.offsetTop + highlightElement.offsetHeight + 15 + "px";
       self.popTip.style.left = highlightElement.offsetLeft + highlightElement.offsetWidth + "px";
+      // self.popTip.style.top = highlightElement.offsetTop + highlightElement.offsetHeight + "px";
+      // self.popTip.style.left = highlightElement.offsetLeft + 10 + "px";
       self.element.appendChild(self.popTip);
       self.markHighlightAsActive(highlightElement);
       window.addEventListener('resize', self.removePopTip);
@@ -308,8 +309,8 @@ var contentHighlightWorker = function(element, options){
     }
 
     var highlightId = self.getHighlightId(highlightElement);
-    components.quizPanels[0].getCommentList(highlightId);
-    $('.content-highlight-identifier-' + highlightId).addClass('content-highlight-active');
+    // components.quizPanels[0].getCommentList(highlightId);
+    document.querySelector('.content-highlight-identifier-' + highlightId).classList.add('content-highlight-active');
   }
 
   this.removePopTip = function(e){
@@ -323,15 +324,17 @@ var contentHighlightWorker = function(element, options){
       window.removeEventListener('resize', self.removePopTip);
       document.removeEventListener('click', self.removePopTip);
 
-      $('.content-highlight-active').removeClass('content-highlight-active')
+      document.querySelector('.content-highlight-active').classList.remove('content-highlight-active')
     }
   }
 
   this.buildPopupFromHighlightElement = function(highlightElement){
     self.popTip = document.createElement('div');
     self.popTip.className = self.settings.popTipClass;
+    self.popTip.innerHTML = "<span class='description'>" + (highlightElement.dataset.description || self.settings.popTipDefaultHead)+ "</span>";
     if(highlightElement.dataset.removable == "true"){
-      self.popTip.innerHTML += "<a href='javascript:void(0);' class='cancel_highlight'><i class='material-icons tiny'>close</i></a>";
+      self.popTip.innerHTML += "<a href='javascript:void(0);' class='cancel_highlight'>click to remove</a>";
+      // self.popTip.innerHTML += "<a href='javascript:void(0);' class='cancel_highlight'><i class='material-icons tiny'>close</i></a>";
       if(self.popTip.getElementsByClassName('cancel_highlight')[0] != undefined){
         self.popTip.getElementsByClassName('cancel_highlight')[0].addEventListener('click', function(){
           self.removePopTip();
@@ -355,7 +358,7 @@ var contentHighlightWorker = function(element, options){
         callbackFunc(data.all_highlights);
 
         if(data.new_highlight_id != null) {
-          components.quizPanels[0].showPopTip(data.new_highlight_id);
+          // components.quizPanels[0].showPopTip(data.new_highlight_id);
         }
       }
     };
