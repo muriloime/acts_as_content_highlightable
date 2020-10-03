@@ -1,17 +1,17 @@
-.content-highlight{
-  background: #E4FC5B;
+.content-highlight {
+  background: #faed27;
   cursor: pointer;
 }
-.content-highlight-lifetime-me{
-  background: #66d313;
+.content-highlight-lifetime-me {
+  background: #faed27;
 }
-.content-highlight-lifetime-others{
-  background: #E4FC5B;
+.content-highlight-lifetime-others {
+  background: #39ff14;
 }
-.content-highlight-active{
-  background: #c1c124;
+.content-highlight-active {
+  background: #faed27;
 }
-.content-highlight-poptip{
+.content-highlight-poptip {
   position: absolute;
   font-size: 14px;
   line-height: 15px;
@@ -23,7 +23,7 @@
   color: white;
   width: 130px;
 }
-.content-highlight-poptip .description{
+.content-highlight-poptip .description {
   font-size: 100%;
   line-height: 140%;
   display: block;
@@ -31,7 +31,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.content-highlight-poptip .cancel_highlight{
+.content-highlight-poptip .cancel_highlight {
   font-size: 80%;
   text-decoration: underline;
   color: inherit;
